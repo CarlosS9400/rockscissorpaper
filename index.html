@@ -31,7 +31,7 @@
     .controls {
         
         display: flex;
-        height: 20vh;
+        height: 18vh;
         flex-direction: row;
         justify-content: space-around;
         justify-items: stretch;
@@ -54,13 +54,13 @@
     @media screen and (min-width:500px) {
         .bot, 
         .player {
-          width: 15%;
+          width: 12%;
 
         }
         .rock,
         .scissor,
         .paper {
-            width: 6%;
+            width: 5%;
         }
     }
   
@@ -76,9 +76,9 @@
             <img class="player" v-bind:src=`./images/`+playerLink width="50%"/>
 
             <div class="controls">
-                <img  class="rock" v-bind:src=`./images/`+rock  @click="playGame('rock')" width="18%"/>
-                <img  class="scissor" v-bind:src=`./images/`+scissor  @click="playGame('scissor')" width="18%"/>
-                <img  class="paper" v-bind:src=`./images/`+paper   @click="playGame('paper')" width="18%"/>
+                <img  class="rock" v-bind:src=`./images/`+rock  @click="playGame('rock')" width="13%"/>
+                <img  class="scissor" v-bind:src=`./images/`+scissor  @click="playGame('scissor')" width="13%"/>
+                <img  class="paper" v-bind:src=`./images/`+paper   @click="playGame('paper')" width="13%"/>
             </div>
             
             
