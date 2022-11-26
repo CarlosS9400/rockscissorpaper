@@ -43,12 +43,18 @@
         margin-top: 1em;
     }
 
-    h1 {
+    h2 {
         margin-top: 0.5em;
     }
 
-    #winner {
+    #winnerMessage {
+        color: blue;
+        font-weight: bold;
+    }
+
+    #winner{
         color: red;
+        font-weight: bold;
     }
 
     @media screen and (min-width:500px) {
@@ -69,16 +75,18 @@
     
     <div id="app">
             
-            <h1>{{ heading }}</h1>
-            <h2 id="winner">{{ resultMessage }}</h2>
+            <h2>{{ heading }}</h2>
+            <h3 id="winnerMessage">{{ rounds }} {{ resultMessage }}</h3>
+            <h2 id="winner">{{winner}}</h2>
+         
            
             <img class="bot" v-bind:src=`./images/`+botLink width="50%"/> 
             <img class="player" v-bind:src=`./images/`+playerLink width="50%"/>
 
             <div class="controls">
-                <img  class="rock" v-bind:src=`./images/`+rock  @click="playGame('rock')" width="13%"/>
-                <img  class="scissor" v-bind:src=`./images/`+scissor  @click="playGame('scissor')" width="13%"/>
-                <img  class="paper" v-bind:src=`./images/`+paper   @click="playGame('paper')" width="13%"/>
+                <img  class="rock" v-bind:src=`./images/`+rock  @click="gameRounds('rock')" width="13%"/>
+                <img  class="scissor" v-bind:src=`./images/`+scissor  @click="gameRounds('scissor')" width="13%"/>
+                <img  class="paper" v-bind:src=`./images/`+paper   @click="gameRounds('paper')" width="13%"/>
             </div>
             
             
@@ -91,6 +99,8 @@
         el: "#app",
         data: {
             "heading": 'Paper, Scissor, Rock', 
+            "rounds": "",
+            "winner": "Who is the winner!!!",
             "botLink": 'Placeholder-Bot.png',
             "playerLink": 'Placeholder-You.png',
             
@@ -99,6 +109,13 @@
             "paper": 'paper-btn.png',
 
             "resultMessage": "",
+            "maxGameRounds": "3",
+            "currentGame": "0",
+
+            "botScore": "0",
+            "playerScore": "0"
+        
+            
 
         },
        
@@ -123,7 +140,44 @@
 
                 return argT
             },
+
+        
+
+            gameRounds: function(argT) {
+
+               
+
+                if(this.currentGame<this.maxGameRounds) {
+                    
+                        this.playGame(argT)
+                        
+                        this.rounds = `Round: ${this.currentGame} - `
+                
+                }
+
+                if (this.currentGame===3) {
+                    this.heading = "The game is over"
+
+                    
+                    if(this.botScore > this.playerScore) {this.winner = "Final Result: Computer Won!!!"}
+                    if(this.playerScore > this.botScore) {this.winner = "Final Result: You Won!!!"}
+                    if(this.botScore === this.playerScore) {this.winner = "This game has a tie!!!"}
+                }
+
+                console.log(this.botScore)
+                console.log(this.playerScore)
+                
+
+                
+
+
+               
+                
+            },
+
             playGame: function(argT) {
+
+                this.currentGame++
 
                 let computerChoice = this.botChoice()
                 let myPick = this.myChoice(argT)
@@ -143,38 +197,46 @@
                         this.resultMessage =  "Computer Won!!!"
                         this.botLink = 'rock-win.png'
                         this.playerLink = 'scissor-lose.png'
+                        this.botScore++
 
                     } else if ( cPick === "rock" & myPick === "paper") {
 
                         this.resultMessage = "You Won!!!"
                         this.botLink = 'rock-lose.png'
                         this.playerLink = 'paper-win.png'
+                        this.playerScore++
 
                     } else if ( cPick === "scissor" & myPick === "rock") {
 
                         this.resultMessage = "You Won!!!"
                         this.botLink = 'scissor-lose.png'
                         this.playerLink = 'rock-win.png'
+                        this.playerScore++
 
                     } else if ( cPick === "scissor" & myPick === "paper") {
 
                         this.resultMessage = "Computer Won!!!"
                         this.botLink = 'scissor-win.png'
                         this.playerLink = 'paper-lose.png'
+                        this.botScore++
 
                     } else if ( cPick === "paper" & myPick === "rock") {
 
                         this.resultMessage = "Computer Won!!!"
                         this.botLink = 'paper-win.png'
                         this.playerLink = 'rock-lose.png'
+                        this.botScore++
 
                     } else if ( cPick === "paper" & myPick === "scissor") {
 
                         this.resultMessage = "You Won!!!"
                         this.botLink = 'paper-lose.png'
                         this.playerLink = 'scissor-win.png'
+                        this.playerScore++
 
                 }
+
+                
 
             }
         }
