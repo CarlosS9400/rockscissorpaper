@@ -156,12 +156,23 @@
                 }
 
                 if (this.currentGame===3) {
+
                     this.heading = "The game is over"
 
                     
-                    if(this.botScore > this.playerScore) {this.winner = `Final Result: Computer Won (${this.botScore})`}
-                    if(this.playerScore > this.botScore) {this.winner = `Final Result: You Won (${this.playerScore})`}
-                    if(this.botScore === this.playerScore) {this.winner = "This game has a tie!!!"}
+                    if(this.botScore === 2 && this.botScore > this.playerScore) {
+
+                        this.winner = `Final Result: Computer Won (${this.botScore})`
+
+                    } else if (this.playerScore === 2 && this.playerScore > this.botScore) {
+
+                        this.winner = `Final Result: You Won (${this.playerScore})`
+
+                    } else if (this.botScore === this.playerScore) {
+                        
+                        this.winner = "This game has a tie!!!"
+
+                    } 
                 }
 
                 console.log(this.botScore)
