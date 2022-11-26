@@ -160,19 +160,22 @@
                     this.heading = "The game is over"
 
                     
-                    if(this.botScore === 2 && this.botScore > this.playerScore) {
+                    if(this.botScore >= 2 && this.botScore > this.playerScore) {
 
-                        this.winner = `Final Result: Computer Won (${this.botScore})`
+                        this.winner = `Final Result: Computer Won. (${this.botScore})`
 
-                    } else if (this.playerScore === 2 && this.playerScore > this.botScore) {
+                    } else if (this.playerScore >= 2 && this.playerScore > this.botScore) {
 
-                        this.winner = `Final Result: You Won (${this.playerScore})`
+                        this.winner = `Final Result: You Won. (${this.playerScore})`
 
                     } else if (this.botScore === this.playerScore) {
                         
                         this.winner = "This game has a tie!!!"
 
-                    } 
+                    } else {
+
+                        this.winner = "There is no winner."
+                    }
                 }
 
                 console.log(this.botScore)
